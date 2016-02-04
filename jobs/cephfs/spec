@@ -1,0 +1,6 @@
+---
+name: cephfs
+templates:
+  ctl.erb: bin/ctl
+
+packages:
