@@ -1,0 +1,4 @@
+set -e -x
+
+chmod +x cephfs/install.sh
+cp cephfs/install.sh ${BOSH_INSTALL_TARGET}

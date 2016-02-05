@@ -1,0 +1,7 @@
+---
+name: cephfs
+
+dependencies:
+
+files:
+- cephfs/install.sh

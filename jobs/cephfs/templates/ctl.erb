@@ -7,28 +7,24 @@ PIDFILE=${RUN_DIR}/pid
 case $1 in
 
   start)
+    pid_guard $PIDFILE "ceph"
     mkdir -p $RUN_DIR $LOG_DIR
     chown -R vcap:vcap $RUN_DIR $LOG_DIR
 
     echo $$ > $PIDFILE
 
-    cd /var/vcap/packages/cephfs
+    exec chpst -u vcap:vcap /var/vcap/packages/cephfs/install.sh \
+          1>>$LOG_DIR/ceph.stdout.log \
+          2>>$LOG_DIR/ceph.stderr.log
 
-#    export PATH=/var/vcap/packages/ruby_1.9.3/bin:$PATH
-
-#    exec /var/vcap/packages/ruby_1.9.3/bin/bundle exec \
-#      rackup -p <%= properties.web_ui.port %> \
-#      >>  $LOG_DIR/web_ui.stdout.log \
-#      2>> $LOG_DIR/web_ui.stderr.log
-
-    sudo start ceph-all
+#    sudo start ceph-all
 
     ;;
 
   stop)
-#    kill -9 `cat $PIDFILE`
-#    rm -f $PIDFILE
-    sudo stop ceph-all
+    kill -9 `cat $PIDFILE`
+    rm -f $PIDFILE
+#    sudo stop ceph-all
     ;;
 
   *)

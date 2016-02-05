@@ -2,6 +2,7 @@
 blobs
 .dev_builds
 .DS_Store
+dev_releases/**/*
 .final_builds/jobs/**/*.tgz
 .final_builds/packages/**/*.tgz
 *.swp
